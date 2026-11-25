@@ -1,0 +1,18 @@
+services:
+  api:
+    build: { context: ., target: api }
+    environment:
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET (32+ characters)}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:?Set ADMIN_EMAIL}
+      ADMIN_PASSWORD_HASH: ${ADMIN_PASSWORD_HASH:-}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+      DATABASE_FILE: /data/zewar.db
+      CORS_ORIGINS: http://localhost:8080
+    volumes: [zewar-data:/data]
+    restart: unless-stopped
+  web:
+    build: { context: ., target: web }
+    ports: ["8080:80"]
+    depends_on: [api]
+volumes:
+  zewar-data:

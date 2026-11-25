@@ -1,0 +1,21 @@
+{
+  "name": "zewar-jewellery",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w @store/api & npm run dev -w @store/web",
+    "dev:demo": "npm run dev:demo -w @store/web",
+    "build": "npm run build -w @store/api && npm run build -w @store/web",
+    "test": "npm test -w @store/api",
+    "typecheck": "tsc -p apps/api && tsc -p apps/web",
+    "tokens": "node scripts/build-tokens.mjs"
+  },
+  "engines": {
+    "node": ">=22.13"
+  },
+  "description": "Zewar \u2014 fine jewellery, in real-time 3D"
+}
